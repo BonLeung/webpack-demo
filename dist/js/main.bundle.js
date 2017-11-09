@@ -202,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(7);
+var	fixUrls = __webpack_require__(8);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -528,11 +528,41 @@ var _layer = __webpack_require__(3);
 
 var _layer2 = _interopRequireDefault(_layer);
 
-__webpack_require__(9);
+__webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
+    ;
+    (function (win) {
+        var doc = win.document;
+        var docEl = doc.documentElement;
+        var tid;
+
+        function refreshRem() {
+            var width = docEl.getBoundingClientRect().width;
+            if (width > 540) {
+                // 最大宽度
+                width = 540;
+            }
+            var rem = width / 6.4;
+            docEl.style.fontSize = rem + 'px';
+        }
+
+        win.addEventListener('resize', function () {
+            clearTimeout(tid);
+            tid = setTimeout(refreshRem, 300);
+        }, false);
+        win.addEventListener('pageshow', function (e) {
+            if (e.persisted) {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }
+        }, false);
+
+        refreshRem();
+    })(window);
+
     var app = document.getElementById('app');
     var layer = new _layer2.default();
     app.innerHTML = layer.tpl;
@@ -553,7 +583,7 @@ Object.defineProperty(exports, "__esModule", {
 
 __webpack_require__(4);
 
-var _layer = __webpack_require__(8);
+var _layer = __webpack_require__(9);
 
 var _layer2 = _interopRequireDefault(_layer);
 
@@ -608,7 +638,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".layer {\n  width: 600px;\n  height: 200px;\n  background-color: green;\n}\n.layer > div {\n  width: 300px;\n  height: 100px;\n  background: url(" + __webpack_require__(6) + ");\n}\n.layer .flex-div {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n", ""]);
+exports.push([module.i, ".bg {\n  width: 100%;\n  height: 100%;\n  background: url(" + __webpack_require__(6) + ") no-repeat center;\n  background-size: cover;\n  position: relative;\n}\n.bg .button {\n  width: 200px;\n  height: 50px;\n  background: url(" + __webpack_require__(7) + ") no-repeat center;\n  background-size: cover;\n  position: absolute;\n  bottom: 82px;\n  left: 50%;\n  margin-left: -100px;\n}\n", ""]);
 
 // exports
 
@@ -617,10 +647,16 @@ exports.push([module.i, ".layer {\n  width: 600px;\n  height: 200px;\n  backgrou
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/a9927c5ec8889840823f547bc7074ea3.png";
+module.exports = __webpack_require__.p + "images/5b40d9317687b8f878af9f67db2222e3.jpg";
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/de06c145a60e717b64b6a8080ef5ce85.jpg";
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 
@@ -715,19 +751,19 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"layer\">\r\n  <div>this is a layer</div>\r\n</div>";
+module.exports = "<div class=\"bg\">\r\n  <div class=\"button\"></div>\r\n</div>";
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(10);
+var content = __webpack_require__(11);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -752,20 +788,6 @@ if(false) {
 }
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(undefined);
-// imports
-exports.i(__webpack_require__(11), "");
-
-// module
-exports.push([module.i, "html, body {\r\n    padding: 0;\r\n    margin: 0;\r\n    background-color: red;\r\n}\r\n\r\nul, li {\r\n    padding: 0;\r\n    margin: 0;\r\n    list-style: none;\r\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -774,7 +796,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".flex-div {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n}", ""]);
+exports.push([module.i, "html, body {\r\n    padding: 0;\r\n    margin: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    font-size: 16px;\r\n}\r\n\r\n#app {\r\n  width: 100%;\r\n  height: 100%;\r\n}", ""]);
 
 // exports
 
