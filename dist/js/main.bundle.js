@@ -533,36 +533,6 @@ __webpack_require__(10);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-    ;
-    (function (win) {
-        var doc = win.document;
-        var docEl = doc.documentElement;
-        var tid;
-
-        function refreshRem() {
-            var width = docEl.getBoundingClientRect().width;
-            if (width > 540) {
-                // 最大宽度
-                width = 540;
-            }
-            var rem = width / 6.4;
-            docEl.style.fontSize = rem + 'px';
-        }
-
-        win.addEventListener('resize', function () {
-            clearTimeout(tid);
-            tid = setTimeout(refreshRem, 300);
-        }, false);
-        win.addEventListener('pageshow', function (e) {
-            if (e.persisted) {
-                clearTimeout(tid);
-                tid = setTimeout(refreshRem, 300);
-            }
-        }, false);
-
-        refreshRem();
-    })(window);
-
     var app = document.getElementById('app');
     var layer = new _layer2.default();
     app.innerHTML = layer.tpl;
@@ -796,7 +766,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "html, body {\r\n    padding: 0;\r\n    margin: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    font-size: 16px;\r\n}\r\n\r\n#app {\r\n  width: 100%;\r\n  height: 100%;\r\n}", ""]);
+exports.push([module.i, "html, body {\r\n    padding: 0;\r\n    margin: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#app {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n @media only screen and (min-width: 320px){\r\n   html {\r\n     font-size: 62.5% !important;\r\n   }\r\n }\r\n @media only screen and (min-width: 640px){\r\n   html {\r\n     font-size: 125% !important;\r\n   }\r\n }\r\n @media only screen and (min-width: 750px){\r\n   html {\r\n     font-size: 150% !important;\r\n   }\r\n }\r\n @media only screen and (min-width: 1242px){\r\n   html {\r\n     font-size: 187.5% !important;\r\n   }\r\n }", ""]);
 
 // exports
 
